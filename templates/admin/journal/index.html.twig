@@ -6,7 +6,7 @@
     {# Total Montant juste sous le bouton "Add Journal" #}
     {% set total = 0 %}
     {% for entity in entities %}
-        {% set total = total + entity.instance.montant %}
+        {% set total = total + (entity.instance.montant / 100) %}
     {% endfor %}
 
     <div style="margin-top:10px; text-align:right; font-weight:bold;">

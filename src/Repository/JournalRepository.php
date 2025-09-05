@@ -40,4 +40,12 @@ class JournalRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+    public function getTotalMontantParType(){
+        return $this->createQueryBuilder('j')
+        ->select('j.typeJournal AS typeJournal, SUM(j.montant) AS totalMontant')
+        ->where('j.typeJournal != 2')
+        ->groupBy('j.typeJournal')
+        ->getQuery()
+        ->getResult();
+    }
 }

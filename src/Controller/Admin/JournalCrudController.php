@@ -16,6 +16,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Filter\EntityFilter;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\ChoiceFilter;
 use App\Entity\Motif;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use Doctrine\ORM\EntityManagerInterface;
 
 class JournalCrudController extends AbstractCrudController
 {
@@ -60,6 +61,30 @@ class JournalCrudController extends AbstractCrudController
                 'Niditra/Nivoaka' => '2',
             ])
         );
+    }
+    public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
+    {
+        if (!$entityInstance instanceof Journal) return;
+
+        if ($entityInstance->getTypeJournal() === "2") {
+            // Clone pour type 0
+            $journal0 = clone $entityInstance;
+            $journal0->setTypeJournal('0');
+            $entityManager->persist($journal0);
+
+            // Clone pour type 1
+            $journal1 = clone $entityInstance;
+            $journal1->setTypeJournal('1');
+            $entityManager->persist($journal1);
+
+            // Ne pas persister l'original
+            $entityManager->flush();
+        }
+        else {
+            // Pour les autres types (0 et 1), on persiste l'entité normalement
+            $entityManager->persist($entityInstance);
+            $entityManager->flush();
+        }
     }
     
 }

@@ -11,10 +11,19 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use Symfony\Component\HttpFoundation\Response;
+use App\Repository\JournalRepository;
 
 #[AdminDashboard(routePath: '/admin', routeName: 'admin')]
 class DashboardController extends AbstractDashboardController
 {
+     private JournalRepository $journalRepository;
+
+    // Symfony injecte le repository ici
+    public function __construct(JournalRepository $journalRepository)
+    {
+        $this->journalRepository = $journalRepository;
+    }
+
     public function index(): Response
     {
         // 👉 Redirection automatique vers la liste des journals
@@ -23,8 +32,11 @@ class DashboardController extends AbstractDashboardController
         /*return $this->redirect(
             $adminUrlGenerator->setController(JournalCrudController::class)->generateUrl()
         );*/
-        return $this->render('admin/dashboard/index.html.twig');
-        //return parent::index();
+        $totauxParType = $this->journalRepository->getTotalMontantParType();
+        return $this->render('admin/dashboard/index.html.twig',[
+            'totalParType'=> $totauxParType
+        ]);
+
     }
 
     public function configureDashboard(): Dashboard

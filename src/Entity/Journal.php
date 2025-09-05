@@ -17,8 +17,8 @@ class Journal
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTime $dateJournal = null;
 
-    #[ORM\Column(type: Types::DECIMAL, precision: 20, scale: 4)]
-    private ?float $montant = null;
+    #[ORM\Column(type: Types::DECIMAL, precision: 15, scale: 4)]
+    private ?string $montant = null;
 
     #[ORM\ManyToOne(inversedBy: 'journals')]
     #[ORM\JoinColumn(nullable: false)]
@@ -47,15 +47,16 @@ class Journal
         return $this;
     }
 
-    public function getMontant(): ?float
+    // Getter
+    public function getMontant(): ?string
     {
         return $this->montant;
     }
 
-    public function setMontant(float $montant): static
+    // Setter
+    public function setMontant(?string $montant): self
     {
         $this->montant = $montant;
-
         return $this;
     }
 
