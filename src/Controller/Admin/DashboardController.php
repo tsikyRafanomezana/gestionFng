@@ -33,8 +33,11 @@ class DashboardController extends AbstractDashboardController
             $adminUrlGenerator->setController(JournalCrudController::class)->generateUrl()
         );*/
         $totauxParType = $this->journalRepository->getTotalMontantParType();
+        $totauxParTypeEtMois = $this->journalRepository->getSoldeParMois();
+       //var_dump($totauxParTypeEtMois);die;
         return $this->render('admin/dashboard/index.html.twig',[
-            'totalParType'=> $totauxParType
+            'totalParType'=> $totauxParType,
+            'totalParTypeEtMois'=> $totauxParTypeEtMois
         ]);
 
     }

@@ -48,4 +48,21 @@ class JournalRepository extends ServiceEntityRepository
         ->getQuery()
         ->getResult();
     }
+    public function getSoldeParMois()
+    {
+        return $this->createQueryBuilder('j')
+            ->select('YEAR(j.dateJournal) AS annee')
+            ->addSelect('MONTH(j.dateJournal) AS mois')
+            ->addSelect('SUM(CASE WHEN j.typeJournal = 0 THEN j.montant ELSE 0 END) AS totalTypeNiditra')
+            ->addSelect('SUM(CASE WHEN j.typeJournal = 1 THEN j.montant ELSE 0 END) AS totalTypeNivoaka')
+            ->where('j.typeJournal IN (0,1)')
+            ->groupBy('annee')
+            ->addGroupBy('mois')
+            ->orderBy('annee', 'ASC')
+            ->addOrderBy('mois', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+
 }
