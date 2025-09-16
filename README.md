@@ -1,5 +1,5 @@
 ## Gestionfng
-Ce projet permet de gérer les finances d'une église : suivi clair des transactions et du solde.
+Un outil de gestion budgétaire visant à faciliter le suivi des montants entrants et sortants de manière structurée et intuitive.
 
 ## Fonctionnalités:
 - Ajouter, modifier ou supprimer des transactions financières
