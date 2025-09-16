@@ -15,7 +15,7 @@ Un outil de gestion budgétaire conçu pour faciliter le suivi des montants entr
 - Interface simple et intuitive pour une meilleure gestion budgétaire
 - Export des données (fonctionnalité à venir)
 
-## Technologies utilisées:
+## 🚀 Technologies utilisées:
 - PHP 8.3
 - Symfony 6.4
 - MySQL
