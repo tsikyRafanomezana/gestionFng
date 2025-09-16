@@ -1,7 +1,7 @@
 ## Gestionfng
 Un outil de gestion budgétaire visant à faciliter le suivi des montants entrants et sortants de manière structurée et intuitive.
 
-##Objectifs :
+## Objectifs :
 - Simplifier le suivi financier de l’église
 - Offrir une interface intuitive aux responsables
 - Export des données
